@@ -4,6 +4,8 @@ from torch.utils.data import DataLoader
 from unet import UNet
 from dataloader import PrePostDataset  # update to include masks
 import os
+import json
+
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 # -------------------------
