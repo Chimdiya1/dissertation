@@ -25,6 +25,9 @@ model = UNet(in_channels=6, out_channels=1).to(device)
 loss_fn = nn.BCEWithLogitsLoss()
 opt = torch.optim.Adam(model.parameters(), lr=1e-4)
 
+results = {"epochs": [], "iou": [], "dice": []}
+metrics_path = "/content/checkpoints/metrics.json"
+
 # -------------------------
 # Training Loop (5 epochs)
 # -------------------------
@@ -49,6 +52,26 @@ for epoch in range(EPOCHS):
         opt.step()
 
         total_loss += loss.item()
+
+    # Compute metrics (example: using prediction threshold)
+    with torch.no_grad():
+        pred_bin = (pred > 0.5).float()
+
+        intersection = (pred_bin * mask).sum(dim=(1,2,3))
+        union = pred_bin.sum(dim=(1,2,3)) + mask.sum(dim=(1,2,3)) - intersection
+        dice_score = (2 * intersection) / (pred_bin.sum(dim=(1,2,3)) + mask.sum(dim=(1,2,3)) + 1e-6)
+        iou_score = intersection / (union + 1e-6)
+
+    mean_iou = iou_score.mean().item()
+    mean_dice = dice_score.mean().item()
+
+    results["epochs"].append(epoch+1)
+    results["iou"].append(mean_iou)
+    results["dice"].append(mean_dice)
+
+    # Save metrics so plot script can read them
+    with open(metrics_path, "w") as f:
+        json.dump(results, f, indent=4)
 
     print(f"Epoch {epoch+1}/{EPOCHS} — Loss: {total_loss:.4f}")
 
