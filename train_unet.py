@@ -11,14 +11,22 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 # -------------------------
 # Dataset
 # -------------------------
-dataset = PrePostDataset(
-    pre_dir="/content/data/pre",
-    post_dir="/content/data/post",
-    mask_dir="/content/data/masks",
+train_dataset = PrePostDataset(
+    pre_dir="/content/data/train/pre",
+    post_dir="/content/data/train/post",
+    mask_dir="/content/data/train/masks",
     augment=True
 )
 
-loader = DataLoader(dataset, batch_size=4, shuffle=True, num_workers=0)
+val_dataset = PrePostDataset(
+    pre_dir="/content/data/val/pre",
+    post_dir="/content/data/val/post",
+    mask_dir="/content/data/val/masks",
+    augment=False  # no augmentation on validation!
+)
+
+train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True, num_workers=0)
+val_loader   = DataLoader(val_dataset,   batch_size=4, shuffle=False, num_workers=0)
 
 # -------------------------
 # Model, Loss, Optimizer
@@ -39,7 +47,7 @@ for epoch in range(EPOCHS):
     model.train()
     total_loss = 0
 
-    for batch in loader:
+    for batch in train_loader:
         pre = batch["pre"].to(device)
         post = batch["post"].to(device)
         mask = batch["mask"].to(device)
@@ -54,6 +62,22 @@ for epoch in range(EPOCHS):
         opt.step()
 
         total_loss += loss.item()
+    # -------------------------
+    # VALIDATION
+    # -------------------------
+    model.eval()
+    total_val_loss = 0
+    with torch.no_grad():
+        for batch in val_loader:
+            pre = batch["pre"].to(device)
+            post = batch["post"].to(device)
+            mask = batch["mask"].to(device)
+
+            inp = torch.cat([pre, post], dim=1)
+            pred = model(inp)
+            loss = loss_fn(pred, mask)
+            total_val_loss += loss.item()
+
 
     # Compute metrics (example: using prediction threshold)
     with torch.no_grad():
