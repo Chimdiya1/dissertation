@@ -45,7 +45,8 @@ def move_set(files, destination_root):
 
         # Find corresponding post & mask filenames
         post_file = pre_file.replace("pre_disaster", "post_disaster").replace("pre_", "post_")
-        mask_file = post_file.replace(".png", ".png").replace(".jpg", ".png")
+        mask_file = post_file.replace("_post_disaster_patch", "_post_disaster_mask_patch")
+
 
         pre_src = os.path.join(pre_dir, pre_file)
         post_src = os.path.join(post_dir, post_file)

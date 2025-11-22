@@ -48,6 +48,38 @@ def evaluate(model, loader, save_preds=False, pred_dir="predictions"):
             pre = batch["pre"].to(device)
             post = batch["post"].to(device)
             mask = batch["mask"].to(device)
+            # ========================================
+            # DEBUG BLOCK — SHAPES, VALUES, MODEL TEST
+            # ========================================
+            print("\n--- DEBUG: Checking batch ---")
+
+            print("pre shape:", pre.shape)
+            print("post shape:", post.shape)
+            print("mask shape:", mask.shape)
+            print("---------------------------------------------")
+
+            print("pre min/max:", float(pre.min()), float(pre.max()))
+            print("post min/max:", float(post.min()), float(post.max()))
+            print("mask unique:", mask.unique())
+            print("---------------------------------------------")
+
+
+            # Check concatenation
+            inp_test = torch.cat([pre, post], dim=1)
+            print("concat shape:", inp_test.shape)
+
+            # Forward test
+            try:
+                pred_test = model(inp_test)
+                print("pred shape:", pred_test.shape)
+                print("pred min/max:", float(pred_test.min()), float(pred_test.max()))
+            except Exception as e:
+                print("MODEL FORWARD ERROR:", e)
+
+            raise SystemExit("Debug completed. Check outputs above.")
+            # ========================================
+            # END DEBUG BLOCK
+            # ========================================
 
             inp = torch.cat([pre, post], dim=1)
 
