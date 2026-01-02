@@ -35,6 +35,7 @@ class PrePostDataset(Dataset):
         pre_img = Image.open(pre_path).convert("RGB")
         post_img = Image.open(post_path).convert("RGB")
         mask_img = Image.open(mask_path).convert("L")  # grayscale mask
+        print(mask_path , "======",mask_img)
 
         if self.augment:
             # synchronized augmentations
@@ -61,9 +62,10 @@ class PrePostDataset(Dataset):
         pre_img = self.to_tensor(pre_img)
         post_img = self.to_tensor(post_img)
         mask_img = self.to_tensor(mask_img)
+        # print(mask_path , "======",mask_img)
 
         #  FIX: Binarize mask
-        mask_img = (mask_img > 0.001).float()
+        mask_img = (mask_img > 0).float()
 
         return {
             "pre": pre_img,
@@ -82,7 +84,7 @@ if __name__ == "__main__":
     mask_path = "/Users/chimdiaanyiam/Desktop/school/dissertation/train/masks_512"
 
     dataset = PrePostDataset(pre_path, post_path, mask_path, augment=True)
-    loader = DataLoader(dataset, batch_size=4, shuffle=True, num_workers=2)
+    loader = DataLoader(dataset, batch_size=200, shuffle=True, num_workers=2)
 
     batch = next(iter(loader))
     print(batch["pre"].shape, batch["post"].shape, batch["mask"].shape)

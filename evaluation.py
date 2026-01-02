@@ -3,7 +3,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 import numpy as np
 import os
-from unet import UNet
+from unet_old import UNet
 from dataloader import PrePostDataset
 import cv2
 
