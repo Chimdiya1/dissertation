@@ -2,8 +2,8 @@ import csv
 import random
 from pathlib import Path
 
-TILES_MANIFEST = Path("/Users/chimdiaanyiam/Desktop/school/dissertation/train/tiles_256/tiles_manifest.csv")
-OUT_BALANCED_TRAIN = Path("/Users/chimdiaanyiam/Desktop/school/dissertation/train/tiles_256/train_tiles_balanced.csv")
+TILES_MANIFEST = Path("/content/train/tiles_256/tiles_manifest.csv")
+OUT_BALANCED_TRAIN = Path("/content/train/tiles_256/train_tiles_balanced.csv")
 
 SEED = 42
 

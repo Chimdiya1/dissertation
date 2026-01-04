@@ -7,13 +7,13 @@ from pathlib import Path
 # ----------------------------
 # Edit these paths
 # ----------------------------
-PRE_IMG_FOLDER  = Path("/Users/chimdiaanyiam/Desktop/school/dissertation/train/images/pre_disaster")
-POST_IMG_FOLDER = Path("/Users/chimdiaanyiam/Desktop/school/dissertation/train/images/post_disaster")
-POST_JSON_FOLDER = Path("/Users/chimdiaanyiam/Desktop/school/dissertation/train/labels/post_disaster")
-MASK_FOLDER = Path("/Users/chimdiaanyiam/Desktop/school/dissertation/train/masks2")
-SIXCH_FOLDER = Path("/Users/chimdiaanyiam/Desktop/school/dissertation/train/inputs_6ch")
+PRE_IMG_FOLDER  = Path("/content/data/pre_disaster")
+POST_IMG_FOLDER = Path("/content/data/post_disaster")
+POST_JSON_FOLDER = Path("content/labels/post_disaster")
+MASK_FOLDER = Path("/content/train/masks")
+SIXCH_FOLDER = Path("/content/train/inputs_6ch")
 
-OUT_SPLIT_FOLDER = Path("/Users/chimdiaanyiam/Desktop/school/dissertation/train/splits")
+OUT_SPLIT_FOLDER = Path("/content/train/splits")
 OUT_SPLIT_FOLDER.mkdir(parents=True, exist_ok=True)
 
 # ----------------------------

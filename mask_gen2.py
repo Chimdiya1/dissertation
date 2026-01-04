@@ -7,8 +7,8 @@ from PIL import Image, ImageDraw
 # ----------------------------
 # Paths (yours)
 # ----------------------------
-JSON_FOLDER = "/Users/chimdiaanyiam/Desktop/school/dissertation/train/labels/post_disaster"
-OUTPUT_MASK_FOLDER = "/Users/chimdiaanyiam/Desktop/school/dissertation/train/masks2"
+JSON_FOLDER = "/content/labels/post_disaster"
+OUTPUT_MASK_FOLDER = "/content/train/masks"
 
 # ----------------------------
 # Label mapping (5 classes)

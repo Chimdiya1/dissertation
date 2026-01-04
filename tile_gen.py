@@ -9,9 +9,9 @@ from PIL import Image
 # ----------------------------
 # Paths (edit these)
 # ----------------------------
-SPLIT_MANIFEST = Path("/Users/chimdiaanyiam/Desktop/school/dissertation/train/splits/manifest.csv")
+SPLIT_MANIFEST = Path("/content/train/splits/manifest.csv")
 
-OUT_TILE_ROOT = Path("/Users/chimdiaanyiam/Desktop/school/dissertation/train/tiles_256")
+OUT_TILE_ROOT = Path("/content/train/tiles_256")
 # Output structure:
 # tiles_256/
 #   train/inputs/*.npy
