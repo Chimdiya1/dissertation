@@ -9,7 +9,7 @@ from pathlib import Path
 # ----------------------------
 PRE_IMG_FOLDER  = Path("/content/data/pre_disaster")
 POST_IMG_FOLDER = Path("/content/data/post_disaster")
-POST_JSON_FOLDER = Path("content/labels/post_disaster")
+POST_JSON_FOLDER = Path("/content/labels/post_disaster")
 MASK_FOLDER = Path("/content/train/masks")
 SIXCH_FOLDER = Path("/content/train/inputs_6ch")
 

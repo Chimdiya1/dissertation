@@ -52,15 +52,19 @@ class UNet(nn.Module):
         b = self.bottleneck(self.pool(e4))
 
         d4 = self.up4(b)
-        d4 = self.dec4(torch.cat([d4, e4], dim=1))
+        d4 = torch.cat([d4, e4], dim=1)
+        d4 = self.dec4(d4)
 
         d3 = self.up3(d4)
-        d3 = self.dec3(torch.cat([d3, e3], dim=1))
+        d3 = torch.cat([d3, e3], dim=1)
+        d3 = self.dec3(d3)
 
         d2 = self.up2(d3)
-        d2 = self.dec2(torch.cat([d2, e2], dim=1))
+        d2 = torch.cat([d2, e2], dim=1)
+        d2 = self.dec2(d2)
 
         d1 = self.up1(d2)
-        d1 = self.dec1(torch.cat([d1, e1], dim=1))
+        d1 = torch.cat([d1, e1], dim=1)
+        d1 = self.dec1(d1)
 
         return self.out(d1)  # logits (N,C,H,W)
