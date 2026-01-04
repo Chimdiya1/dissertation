@@ -5,9 +5,9 @@ from PIL import Image
 # ----------------------------
 # Set your folders
 # ----------------------------
-PRE_IMG_FOLDER  = "/Users/chimdiaanyiam/Desktop/school/dissertation/train/images/pre_disaster"
-POST_IMG_FOLDER = "/Users/chimdiaanyiam/Desktop/school/dissertation/train/images/post_disaster"
-OUTPUT_6CH_FOLDER = "/Users/chimdiaanyiam/Desktop/school/dissertation/train/inputs_6ch"
+PRE_IMG_FOLDER  = "/content/data/pre_disaster"
+POST_IMG_FOLDER = "/content/data/post_disaster"
+OUTPUT_6CH_FOLDER = "/content/train/inputs_6ch"
 
 # If you want float in [0,1] set True; otherwise keep uint8 0..255
 NORMALIZE_TO_0_1 = True
